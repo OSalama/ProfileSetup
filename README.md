@@ -91,3 +91,15 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyr
 sudo apt-get update && sudo apt-get install google-cloud-cli
 gcloud init --no-launch-browser
 ```
+
+### Docker under WSL
+https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+
+```
+sudo apt-get update\nsudo apt-get install ca-certificates curl\nsudo install -m 0755 -d /etc/apt/keyrings\nsudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc\nsudo chmod a+r /etc/apt/keyrings/docker.asc
+ echo \\n  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \\n  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \\n  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null\nsudo apt-get update
+sudo usermod -aG docker $USER && newgrp docker
+sudo update-alternatives --config iptables  # Select legacy option
+sudo dockerd
+docker run hello-world # in new terminal
+```
